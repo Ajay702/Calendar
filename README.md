@@ -9,7 +9,7 @@
    source venv/bin/activate  # On macOS/Linux; use .\venv\Scripts\activate on Windows
    pip install -r requirements.txt
    flask db init
-   flask run &  # Runs Flask server in the background
+   flask run  # Runs Flask server in the background
 
    # Frontend Setup
    cd ..
