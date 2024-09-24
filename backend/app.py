@@ -15,16 +15,15 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
     jwt.init_app(app)
 
-    # Configure CORS to allow requests from the frontend origin
+
     CORS(app, resources={
         r"/api/*": {
-            "origins": ["http://192.168.1.75:5000"],
+            "origins": ["*"],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"],
             "supports_credentials": True
@@ -32,7 +31,6 @@ def create_app():
     })
 
 
-    # Register Blueprints
     from routes.auth_routes import auth_bp
     from routes.event_routes import event_bp
 

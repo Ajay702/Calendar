@@ -22,7 +22,6 @@ const Register = () => {
         setError('');
         try {
             await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/register`, formData);
-            // Auto-login after registration
             const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, formData);
             loginUser(response.data);
             navigate('/calendar');

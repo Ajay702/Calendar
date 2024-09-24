@@ -7,7 +7,7 @@ class Event(db.Model):
     datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     description = db.Column(db.Text, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    reminder = db.Column(db.Boolean, default=True, nullable=False)  # New field
+    reminder = db.Column(db.Boolean, default=True, nullable=False)
 
     def to_dict(self):
         return {
@@ -16,5 +16,5 @@ class Event(db.Model):
             'datetime': self.datetime.isoformat(),
             'description': self.description,
             'user_id': self.user_id,
-            'reminder': self.reminder  # Include the new field in the dictionary
+            'reminder': self.reminder
         }

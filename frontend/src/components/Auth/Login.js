@@ -28,7 +28,7 @@ const Login = () => {
             const response = await axios.post(apiUrl, formData, {
                 headers: { 'Content-Type': 'application/json' },
                 validateStatus: function (status) {
-                    return status < 500; // Resolve only if the status code is less than 500
+                    return status < 500; 
                 }
             });
             
@@ -37,7 +37,6 @@ const Login = () => {
             console.log('Response data:', response.data);
 
             if (response.status === 200 && response.data.access_token) {
-                // Pass the username and password to loginUser, not the response data
                 const result = await loginUser(formData.username, formData.password);
                 if (result.success) {
                     navigate('/calendar');

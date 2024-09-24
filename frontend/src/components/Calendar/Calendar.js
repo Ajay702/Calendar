@@ -84,13 +84,13 @@ const CalendarComponent = () => {
 
     useEffect(() => {
         fetchEvents();
-        const intervalId = setInterval(fetchEvents, 60000); // Fetch events every minute
+        const intervalId = setInterval(fetchEvents, 60000); 
         return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {
         checkUpcomingEvents();
-        const intervalId = setInterval(checkUpcomingEvents, 5000); // Check every 5 seconds
+        const intervalId = setInterval(checkUpcomingEvents, 5000);
         return () => {
             clearInterval(intervalId);
             clearNotificationTimers();
@@ -124,7 +124,6 @@ const CalendarComponent = () => {
 
     const handleSave = async (eventData) => {
         try {
-            // Convert local date to UTC
             const utcDate = new Date(Date.UTC(
                 eventData.start.getFullYear(),
                 eventData.start.getMonth(),
@@ -137,13 +136,12 @@ const CalendarComponent = () => {
             const savedData = {
                 ...eventData,
                 datetime: utcDate.toISOString(),
-                reminder: eventData.reminder === true,  // Ensure reminder is a boolean
+                reminder: eventData.reminder === true, 
             };
 
             addDebugInfo(`Saving event: ${JSON.stringify(savedData)}`);
 
             if (eventData.id) {
-                // Update existing event
                 await axios.put(`${process.env.REACT_APP_API_BASE_URL}/events/${eventData.id}`, savedData, {
                     headers: {
                         Authorization: `Bearer ${authTokens.access_token}`,
@@ -151,7 +149,6 @@ const CalendarComponent = () => {
                 });
                 addDebugInfo(`Updated event: ${eventData.id}`);
             } else {
-                // Create new event
                 const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/events/`, savedData, {
                     headers: {
                         Authorization: `Bearer ${authTokens.access_token}`,

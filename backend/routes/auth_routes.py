@@ -9,7 +9,7 @@ import traceback
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/register', methods=['POST'])
-@cross_origin(origins="http://192.168.1.75:5000")
+@cross_origin(origins="*")
 def register():
     data = request.get_json()
     
@@ -28,7 +28,7 @@ def register():
     return jsonify({'message': 'User registered successfully.'}), 201
 
 @auth_bp.route('/login', methods=['POST'])
-@cross_origin(origins="http://192.168.1.75:5000")  # Update this to match your client's origin
+@cross_origin(origins="*")  # Update this to match your client's origin
 def login():
     print("Login route accessed")
     print(f"Request method: {request.method}")
